@@ -18,15 +18,25 @@ public class User {
     @Indexed(unique = true)
     private String email;
     private ArrayList<String> authorities;
+    boolean isActive;
 
-    public User(String username, String password, String email, ArrayList<String> authorities) {
+    public User(String username, String password, String email, ArrayList<String> authorities, boolean isActive) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.authorities = authorities;
+        this.isActive = isActive;
     }
 
     public User() {
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public String getUsername() {

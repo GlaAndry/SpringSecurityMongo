@@ -1,5 +1,6 @@
 package com.glaandry.springsecmongo.springsecmongo.controller;
 
+import com.glaandry.springsecmongo.springsecmongo.common.Constants;
 import com.glaandry.springsecmongo.springsecmongo.model.AuthenticationRequest;
 import com.glaandry.springsecmongo.springsecmongo.model.AuthenticationResponse;
 import com.glaandry.springsecmongo.springsecmongo.model.User;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController()
@@ -41,11 +43,21 @@ public class AuthController {
         String email = authenticationRequest.getEmail();
         String name = authenticationRequest.getUsername();
         String pass = passwordEncoder.encode(authenticationRequest.getPassword());
-        //String pass = authenticationRequest.getPassword();
         ArrayList<String> authorities = authenticationRequest.getAuthorities();
+
+        if(email == null || name == null || pass == null || authorities == null) throw new NullPointerException(
+                "Parametri di inizializzazione Incompleti..\n");
+
         try {
-            userRepository.save(new User(name, pass, email, authorities));
+            if(authorities.isEmpty()) {
+                //Senza ruoli viene creato un utente con accesso ROLE_USER
+                userRepository.save(new User(name, pass, email, new ArrayList<String>(Collections.singleton(Constants.DEFAULT_ROLE)), true));
+            }
+            else {
+                userRepository.save(new User(name, pass, email, authorities, true));
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.ok(new AuthenticationResponse("Error SUBSCRIPTION for: " + name));
         }
         return ResponseEntity.ok(new AuthenticationResponse("Request OK SUBSCRIPTION for: " + name));
