@@ -1,4 +1,4 @@
-package com.glaandry.springsecmongo.springsecmongo.model;
+package com.glaandry.springsecmongo.springsecmongo.model.http;
 
 public class AuthenticationResponse {
 

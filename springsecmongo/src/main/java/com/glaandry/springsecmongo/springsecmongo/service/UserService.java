@@ -28,11 +28,6 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(s);
         if(user == null) throw new UsernameNotFoundException("Utente non trovato");
-
-        //String name = user.getUsername();
-        //String pwd = user.getPassword();
-        //ArrayList auth = user.getAuthorities();
-
         return new UserDetailsImpl(user);
     }
 

@@ -1,6 +1,12 @@
-package com.glaandry.springsecmongo.springsecmongo.model;
+package com.glaandry.springsecmongo.springsecmongo.model.http;
 
 import java.util.ArrayList;
+
+/**
+ * La classe va a mappare la richiesta
+ * nel Body, permettendo di andare a definire gli
+ * elementi che compongono un oggetto di tipo User.
+ */
 
 public class AuthenticationRequest {
 

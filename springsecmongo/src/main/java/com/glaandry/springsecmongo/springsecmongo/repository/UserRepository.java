@@ -8,4 +8,5 @@ import java.util.List;
 public interface UserRepository extends MongoRepository<User, String> {
 
     User findByEmail(String email);
+    User findFirstByEmail(String email);
 }

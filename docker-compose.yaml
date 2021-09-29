@@ -1,37 +1,102 @@
 version: "3.7"
 
 services:
-  db:
-    container_name: mongo-dev
-    image: mongo:4.2
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_DATABASE=auth
-      - MONGO_INITDB_ROOT_PASSWORD=pass
-    networks:
-      - mongo-compose-network
-    ports:
-      - '27017:27017'
-    volumes:
-      - ./data:/data/db
+#  db:
+#    container_name: mongo-dev
+#    image: mongo:4.2
+#    environment:
+#      - MONGO_INITDB_ROOT_USERNAME=admin
+#      - MONGO_INITDB_DATABASE=auth
+#      - MONGO_INITDB_ROOT_PASSWORD=pass
+#    networks:
+#      - mongo-compose-network
+#    ports:
+#      - '27017:27017'
+#    volumes:
+#      - ./data:/data/db
 
-  mongo-express:
-    container_name: mongo-express
-    image: mongo-express
-    depends_on:
-      - db
-    networks:
-      - mongo-compose-network
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongo-dev
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=tribes
+
+#  mongo-express:
+#    container_name: mongo-express
+#    image: mongo-express
+#    depends_on:
+#      - db
+#    networks:
+#      - mongo-compose-network
+#    environment:
+#      - ME_CONFIG_MONGODB_SERVER=mongo-dev
+#      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+#      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+#      - ME_CONFIG_BASICAUTH_USERNAME=admin
+#      - ME_CONFIG_BASICAUTH_PASSWORD=tribes
+#    ports:
+#      - '8081:8081' ##Porta Host: Porta Container
+#    volumes:
+#      - ./data:/data/db
+
+
+  #HADOOP
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    expose:
+      - "9870"
+      - "54310"
+      - "9000"
     ports:
-      - '8081:8081' ##Porta Host: Porta Container
+      - 9870:9870
+      - 9000:9000
     volumes:
-      - ./data:/data/db
+      - ./data/hadoop_data/:/hadoop_data
+    environment:
+      - CLUSTER_NAME=test
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - CORE_CONF_hadoop_http_staticuser_user=root
+      - CORE_CONF_hadoop_proxyuser_hue_hosts=*
+      - CORE_CONF_hadoop_proxyuser_hue_groups=*
+      - CORE_CONF_io_compression_codecs=org.apache.hadoop.io.compress.SnappyCodec
+
+      - HDFS_CONF_dfs_webhdfs_enabled=true
+      - HDFS_CONF_dfs_permissions_enabled=false
+      - HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname___check=false
+      - HDFS_CONF_dfs_safemode_threshold_pct=0
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    expose:
+      - "9871"
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+
+    env_file:
+      - hadoop.env
+
+  datanode2:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode2
+    restart: always
+    expose:
+      - "9872"
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - hadoop.env
+
+  datanode3:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode3
+    restart: always
+    expose:
+      - "9873"
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - hadoop.env
+
+  #END HADOOP
 
 networks:
   mongo-compose-network:

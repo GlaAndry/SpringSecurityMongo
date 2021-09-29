@@ -42,7 +42,7 @@ public class SecurityConfiguration<conf> extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/authentication/**").permitAll() //everyone
                 .antMatchers("/api/prvUser").hasAuthority("ROLE_USER") //Only user
-                .antMatchers("/api/prvAdmin").hasAuthority("ROLE_ADMIN") //only admin
+                .antMatchers("/api/prvAdmin", "/api/admin/**").hasAuthority("ROLE_ADMIN") //only admin
                 .antMatchers("/api/prvMod").hasAuthority("ROLE_MODERATOR") //only mod
                 .anyRequest().authenticated()
                 .and()
