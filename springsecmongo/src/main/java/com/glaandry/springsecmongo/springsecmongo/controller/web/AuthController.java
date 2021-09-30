@@ -1,7 +1,7 @@
-package com.glaandry.springsecmongo.springsecmongo.controller;
+package com.glaandry.springsecmongo.springsecmongo.controller.web;
 
 import com.glaandry.springsecmongo.springsecmongo.common.Constants;
-import com.glaandry.springsecmongo.springsecmongo.model.http.AuthenticationRequest;
+import com.glaandry.springsecmongo.springsecmongo.model.web.AuthenticationRequest;
 import com.glaandry.springsecmongo.springsecmongo.model.User;
 import com.glaandry.springsecmongo.springsecmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

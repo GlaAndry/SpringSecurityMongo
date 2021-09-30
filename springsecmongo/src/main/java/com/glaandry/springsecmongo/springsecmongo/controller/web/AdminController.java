@@ -1,4 +1,4 @@
-package com.glaandry.springsecmongo.springsecmongo.controller;
+package com.glaandry.springsecmongo.springsecmongo.controller.web;
 
 import com.glaandry.springsecmongo.springsecmongo.model.User;
 import com.glaandry.springsecmongo.springsecmongo.repository.UserRepository;

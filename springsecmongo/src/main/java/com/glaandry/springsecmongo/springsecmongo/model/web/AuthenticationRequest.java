@@ -1,4 +1,4 @@
-package com.glaandry.springsecmongo.springsecmongo.model.http;
+package com.glaandry.springsecmongo.springsecmongo.model.web;
 
 import java.util.ArrayList;
 

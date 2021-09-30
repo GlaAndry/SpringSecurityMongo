@@ -1,4 +1,4 @@
-package com.glaandry.springsecmongo.springsecmongo.service;
+package com.glaandry.springsecmongo.springsecmongo.service.security;
 
 import com.glaandry.springsecmongo.springsecmongo.model.User;
 import org.springframework.data.mongodb.core.index.Indexed;
