@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SpringSecurityMongo.iml" filepath="$PROJECT_DIR$/.idea/SpringSecurityMongo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boot-fsshell/boot-fsshell.iml" filepath="$PROJECT_DIR$/boot-fsshell/boot-fsshell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/springsecmongo/springsecmongo.iml" filepath="$PROJECT_DIR$/springsecmongo/springsecmongo.iml" />
     </modules>
   </component>

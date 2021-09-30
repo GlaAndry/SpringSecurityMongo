@@ -7,15 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="boot-fsshell" />
+        <module name="common" />
         <module name="springsecmongo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="boot-fsshell" target="1.6" />
+      <module name="common" target="11" />
       <module name="springsecmongo" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="" />
       <module name="springsecmongo" options="-parameters" />
     </option>
   </component>
